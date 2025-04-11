@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador con Lupa</title>
+    <style>
+        /* Estilo general para la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Estilo del recuadro de búsqueda y el ícono */
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 90%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .search-box button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        /* Texto que se buscará */
+        #content p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        /* Mensaje de "no encontrado" */
+        #noResultsMessage {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Mensaje de "Buscando..." */
+        #loadingMessage {
+            color: orange;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none; /* Inicialmente oculto */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <h1>Bienvenido!</h1>
+        <!-- Recuadro de búsqueda con el ícono de lupa -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar..." oninput="clearMessage()" onkeydown="handleKeyDown(event)">
+            <button onclick="searchText()">
+                <span>&#128269;</span> <!-- Lupa -->
+            </button>
+        </div>
+
+        <!-- Mensaje de "Buscando..." -->
+        <div id="loadingMessage">Buscando...</div>
+
+        <!-- Mensaje de error si no se encuentran coincidencias -->
+        <div id="noResultsMessage" style="display: none;">No se encontraron coincidencias.</div>
+
+        <div id="content">
+            
+        </div>
+    </div>
+
+    <script>
+        // Función para realizar la búsqueda
+        function searchText() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const content = document.getElementById('content');
+            const paragraphs = content.getElementsByTagName('p');
+            let found = false;
+
+            // Mostrar el mensaje "Buscando..."
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('noResultsMessage').style.display = 'none'; // Ocultar el mensaje de "no encontrado"
+
+            // Eliminar cualquier resaltado previo
+            for (let i = 0; i < paragraphs.length; i++) {
+                const paragraph = paragraphs[i];
+                const text = paragraph.textContent.toLowerCase();
+                paragraph.innerHTML = paragraph.textContent;  // Limpiar el texto
+
+                // Si el texto contiene el input, resaltarlo
+                if (text.includes(input) && input !== '') {
+                    const regex = new RegExp(`(${input})`, 'gi');
+                    paragraph.innerHTML = paragraph.textContent.replace(regex, `<span class="highlight">$1</span>`);
+                    found = true;
+                }
+            }
+
+            // Ocultar el mensaje "Buscando..." y mostrar el mensaje de "no encontrado" si no hay resultados
+            setTimeout(function() {
+                document.getElementById('loadingMessage').style.display = 'none'; // Ocultar mensaje "Buscando..."
+                if (!found && input !== '') {
+                    document.getElementById('noResultsMessage').style.display = 'block'; // Mostrar mensaje de "no encontrado"
+                }
+            }, 1000); // Simular un pequeño retraso para ver el mensaje de "Buscando..."
+        }
+
+        // Función para manejar el evento cuando se presiona Enter
+        function handleKeyDown(event) {
+            if (event.key === 'Enter') {
+                searchText();
+            }
+        }
+
+        // Función para limpiar el mensaje de "no encontrado" y "Buscando..." al escribir
+        function clearMessage() {
+            document.getElementById('noResultsMessage').style.display = 'none'; // Ocultar mensaje de "no encontrado"
+            document.getElementById('loadingMessage').style.display = 'none'; // Ocultar mensaje de "Buscando..."
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practica de la clase</title>
+</head>
+<body>
+    <h2>PRACTICA DE CLASE VALIDAD CORREO</h2>
+    <form onsubmit="return validarCorreo()">
+        <label for="email">Correo:</label>
+        <input type="text" id="email" required>
+        <button type= "submit"> Enviar </button>
+    </form>
+
+    <p id=""resultado"></p>
+    <script>
+        function validarCorreo() {
+
+            let correo = document.getElementById("email").value;
+            let regex = /^[\w\.-]+@ [\w\.-]+\.\w+$/;
+            if (regex.test(correo)){
+                document.getElementById("resultado").innerText = "✅ Correo validado";
+                return true;
+
+            } else{
+                document.getElementById ("resultado").innerText = "❌ Correo invalido";
+                return false;
+            }
+        }
+    </script>
+    
+</body>
+</html>

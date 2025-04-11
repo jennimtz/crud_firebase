@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador con Lupa</title>
+    <style>
+        /* Estilo general para la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Estilo del recuadro de búsqueda y el ícono */
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            padding: 5px;
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 90%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .search-box button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        /* Texto que se buscará */
+        #content p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <h1>Buscador con Lupa</h1>
+        <!-- Recuadro de búsqueda con el ícono de lupa -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Buscar..." oninput="searchText()">
+            <button onclick="searchText()">
+                <span>&#128269;</span> <!-- Lupa -->
+            </button>
+        </div>
+
+        <div id="content">
+            <p>Este es un ejemplo de texto donde puedes buscar palabras o frases. Escribe en el cuadro de búsqueda y observa cómo se resaltan las palabras coincidentes.</p>
+            <p>Prueba buscando palabras como "texto", "buscar", o incluso frases completas.</p>
+            <p>Este es un buscador simple que resalta las coincidencias a medida que escribes.</p>
+            <p>¡Intenta buscar lo que quieras!</p>
+        </div>
+    </div>
+
+    <script>
+        // Función para realizar la búsqueda
+        function searchText() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const content = document.getElementById('content');
+            const paragraphs = content.getElementsByTagName('p');
+
+            // Loop a través de todos los párrafos para buscar el texto ingresado
+            for (let i = 0; i < paragraphs.length; i++) {
+                const paragraph = paragraphs[i];
+                const text = paragraph.textContent.toLowerCase();
+
+                // Eliminar cualquier resaltado previo
+                paragraph.innerHTML = paragraph.textContent;
+
+                if (text.includes(input) && input !== '') {
+                    // Resaltar la palabra encontrada
+                    const regex = new RegExp(`(${input})`, 'gi');
+                    paragraph.innerHTML = paragraph.textContent.replace(regex, `<span class="highlight">$1</span>`);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
