@@ -1,16 +1,25 @@
-# crud_firebase
+# CRUD con Firebase en Flutter
 
-A new Flutter project.
+Este proyecto es una aplicación Flutter que implementa un CRUD (Crear, Leer, Actualizar, Eliminar) utilizando **Firebase** como backend para gestionar los datos.
 
-## Getting Started
+## Descripción
 
-This project is a starting point for a Flutter application.
+Este proyecto utiliza Flutter para la creación de la interfaz de usuario y Firebase para gestionar la base de datos y la autenticación. La aplicación permite realizar las operaciones de CRUD sobre datos almacenados en Firebase.
 
-A few resources to get you started if this is your first Flutter project:
+## Tecnologías utilizadas
+- **Flutter**: Framework para desarrollar aplicaciones móviles nativas.
+- **Firebase**: Plataforma de Google para la gestión de bases de datos en tiempo real y autenticación de usuarios.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Funcionalidades
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Crear**: Agregar nuevos elementos a la base de datos.
+- **Leer**: Ver los elementos almacenados en la base de datos.
+- **Actualizar**: Modificar los elementos existentes.
+- **Eliminar**: Eliminar elementos de la base de datos.
+
+## Instrucciones para ejecutar
+
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/jennimtz/crud_firebase.git
+
